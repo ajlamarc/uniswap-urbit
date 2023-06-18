@@ -7,7 +7,6 @@ import { useListColor } from 'hooks/useColor'
 import { useActiveWeb3React } from 'hooks/web3'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { CheckCircle, Settings } from 'react-feather'
-import ReactGA from 'react-ga'
 import { usePopper } from 'react-popper'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import styled from 'styled-components/macro'
@@ -125,45 +124,20 @@ const ListRow = memo(function ListRow({ listUrl }: { listUrl: string }) {
 
   const handleAcceptListUpdate = useCallback(() => {
     if (!pending) return
-    ReactGA.event({
-      category: 'Lists',
-      action: 'Update List from List Select',
-      label: listUrl,
-    })
     dispatch(acceptListUpdate(listUrl))
   }, [dispatch, listUrl, pending])
 
   const handleRemoveList = useCallback(() => {
-    ReactGA.event({
-      category: 'Lists',
-      action: 'Start Remove List',
-      label: listUrl,
-    })
     if (window.prompt(t`Please confirm you would like to remove this list by typing REMOVE`) === `REMOVE`) {
-      ReactGA.event({
-        category: 'Lists',
-        action: 'Confirm Remove List',
-        label: listUrl,
-      })
       dispatch(removeList(listUrl))
     }
   }, [dispatch, listUrl])
 
   const handleEnableList = useCallback(() => {
-    ReactGA.event({
-      category: 'Lists',
-      action: 'Enable List',
-      label: listUrl,
-    })
     dispatch(enableList(listUrl))
   }, [dispatch, listUrl])
 
   const handleDisableList = useCallback(() => {
-    ReactGA.event({
-      category: 'Lists',
-      action: 'Disable List',
-      label: listUrl,
-    })
     dispatch(disableList(listUrl))
   }, [dispatch, listUrl])
 

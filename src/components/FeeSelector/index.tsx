@@ -11,7 +11,6 @@ import { PoolState, usePools } from 'hooks/usePools'
 import usePrevious from 'hooks/usePrevious'
 import { DynamicSection } from 'pages/AddLiquidity/styled'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import ReactGA from 'react-ga'
 import { Box } from 'rebass'
 import styled, { keyframes } from 'styled-components/macro'
 import { TYPE } from 'theme'
@@ -135,10 +134,6 @@ export default function FeeSelector({
 
   const handleFeePoolSelectWithEvent = useCallback(
     (fee) => {
-      ReactGA.event({
-        category: 'FeePoolSelect',
-        action: 'Manual',
-      })
       handleFeePoolSelect(fee)
     },
     [handleFeePoolSelect]
@@ -156,10 +151,6 @@ export default function FeeSelector({
       setShowOptions(false)
 
       recommended.current = true
-      ReactGA.event({
-        category: 'FeePoolSelect',
-        action: ' Recommended',
-      })
 
       handleFeePoolSelect(largestUsageFeeTier)
     }

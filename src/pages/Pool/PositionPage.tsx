@@ -24,7 +24,6 @@ import { useV3PositionFees } from 'hooks/useV3PositionFees'
 import { useV3PositionFromTokenId } from 'hooks/useV3Positions'
 import { useActiveWeb3React } from 'hooks/web3'
 import { useCallback, useMemo, useRef, useState } from 'react'
-import ReactGA from 'react-ga'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import { Bound } from 'state/mint/v3/actions'
 import { useSingleCallResult } from 'state/multicall/hooks'
@@ -452,12 +451,6 @@ export function PositionPage({
           .then((response: TransactionResponse) => {
             setCollectMigrationHash(response.hash)
             setCollecting(false)
-
-            ReactGA.event({
-              category: 'Liquidity',
-              action: 'CollectV3',
-              label: [feeValue0.currency.symbol, feeValue1.currency.symbol].join('/'),
-            })
 
             addTransaction(response, {
               type: TransactionType.COLLECT_FEES,

@@ -7,7 +7,6 @@ import useTheme from 'hooks/useTheme'
 import useToggle from 'hooks/useToggle'
 import { KeyboardEvent, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Edit } from 'react-feather'
-import ReactGA from 'react-ga'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { FixedSizeList } from 'react-window'
 import { Text } from 'rebass'
@@ -89,16 +88,6 @@ export function CurrencySearch({
   const searchToken = useToken(debouncedQuery)
 
   const searchTokenIsAdded = useIsUserAddedToken(searchToken)
-
-  useEffect(() => {
-    if (isAddressSearch) {
-      ReactGA.event({
-        category: 'Currency Select',
-        action: 'Search by address',
-        label: isAddressSearch,
-      })
-    }
-  }, [isAddressSearch])
 
   const tokenComparator = useTokenComparator(invertSearchOrder)
 

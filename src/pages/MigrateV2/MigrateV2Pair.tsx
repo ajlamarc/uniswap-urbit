@@ -20,7 +20,6 @@ import useTransactionDeadline from 'hooks/useTransactionDeadline'
 import JSBI from 'jsbi'
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
 import { AlertCircle, AlertTriangle, ArrowDown } from 'react-feather'
-import ReactGA from 'react-ga'
 import { Redirect, RouteComponentProps } from 'react-router'
 import { Text } from 'rebass'
 import { useAppDispatch } from 'state/hooks'
@@ -336,12 +335,6 @@ function V2PairMigration({
         return migrator
           .multicall(data, { gasLimit: calculateGasMargin(chainId, gasEstimate) })
           .then((response: TransactionResponse) => {
-            ReactGA.event({
-              category: 'Migrate',
-              action: `${isNotUniswap ? 'SushiSwap' : 'V2'}->V3`,
-              label: `${currency0.symbol}/${currency1.symbol}`,
-            })
-
             addTransaction(response, {
               type: TransactionType.MIGRATE_LIQUIDITY_V3,
               baseCurrencyId: currencyId(currency0),

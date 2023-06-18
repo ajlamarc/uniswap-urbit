@@ -3,7 +3,6 @@ import Card, { DarkGreyCard } from 'components/Card'
 import Row, { AutoRow, RowBetween } from 'components/Row'
 import { useEffect, useRef } from 'react'
 import { ArrowDown, Info, X } from 'react-feather'
-import ReactGA from 'react-ga'
 import styled from 'styled-components/macro'
 import { ExternalLink, TYPE } from 'theme'
 import { isMobile } from 'utils/userAgent'
@@ -64,10 +63,6 @@ const EXTERNAL_APIS = [
     ),
   },
   {
-    name: 'Google Analytics',
-    description: <Trans>The app logs anonymized usage statistics in order to improve over time.</Trans>,
-  },
-  {
     name: 'The Graph',
     description: <Trans>The app fetches blockchain data from The Graph’s hosted service.</Trans>,
   },
@@ -80,11 +75,6 @@ export function PrivacyPolicyModal() {
 
   useEffect(() => {
     if (!open) return
-
-    ReactGA.event({
-      category: 'Modal',
-      action: 'Show Legal',
-    })
   }, [open])
 
   return (

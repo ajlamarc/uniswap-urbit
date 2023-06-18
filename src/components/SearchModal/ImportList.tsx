@@ -11,7 +11,6 @@ import useTheme from 'hooks/useTheme'
 import { transparentize } from 'polished'
 import { useCallback, useState } from 'react'
 import { AlertTriangle, ArrowLeft } from 'react-feather'
-import ReactGA from 'react-ga'
 import { useAppDispatch } from 'state/hooks'
 import { enableList, removeList } from 'state/lists/actions'
 import { useAllLists } from 'state/lists/hooks'
@@ -54,23 +53,12 @@ export function ImportList({ listURL, list, setModalView, onDismiss }: ImportPro
     setAddError(null)
     fetchList(listURL)
       .then(() => {
-        ReactGA.event({
-          category: 'Lists',
-          action: 'Add List',
-          label: listURL,
-        })
-
         // turn list on
         dispatch(enableList(listURL))
         // go back to lists
         setModalView(CurrencyModalView.manage)
       })
       .catch((error) => {
-        ReactGA.event({
-          category: 'Lists',
-          action: 'Add List Failed',
-          label: listURL,
-        })
         setAddError(error.message)
         dispatch(removeList(listURL))
       })

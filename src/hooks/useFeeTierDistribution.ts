@@ -3,7 +3,6 @@ import { Currency, Token } from '@uniswap/sdk-core'
 import { FeeAmount } from '@uniswap/v3-sdk'
 import ms from 'ms.macro'
 import { useMemo } from 'react'
-import ReactGA from 'react-ga'
 import { useBlockNumber } from 'state/application/hooks'
 import { useFeeTierDistributionQuery } from 'state/data/enhanced'
 import { FeeTierDistributionQuery } from 'state/data/generated'
@@ -102,10 +101,6 @@ function usePoolTVL(token0: Token | undefined, token1: Token | undefined) {
     }
 
     if (latestBlock - (_meta?.block?.number ?? 0) > MAX_DATA_BLOCK_AGE) {
-      ReactGA.exception({
-        description: `Graph stale (latest block: ${latestBlock})`,
-      })
-
       return {
         isLoading,
         isFetching,
