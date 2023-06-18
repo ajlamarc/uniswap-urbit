@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro'
-import React, { ErrorInfo } from 'react'
+import React from 'react'
 import styled from 'styled-components/macro'
 
 import store, { AppState } from '../../state'
